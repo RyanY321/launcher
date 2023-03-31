@@ -1,6 +1,28 @@
 @echo off
 chcp 65001 >nul
 
+:GitCheck
+if exist "C:\Program Files (x86)\Git" (
+    goto InstallCheck
+) else (
+    goto GitCheckPGRM
+)
+
+:GitCheckPGRM
+if exist "C:\Program Files\Git" (
+    goto InstallCheck
+) else (
+    goto GitInstall
+)
+
+:InstallCheck
+
+if exist "C:\CobraClient\CobraClientInstall" (
+    goto UpdatePrompt
+) else (
+    goto CobraClientInstall
+)
+
 goto UpdatePrompt
 
 :UpdatePrompt
@@ -27,3 +49,17 @@ goto AfterUpdate
 
 cd C:\CobraClient\CobraClientInstall
 call C:\CobraClient\CobraClientInstall\CobraClient.bat
+
+:GitInstall
+start https://github.com/git-for-windows/git/releases/download/v2.40.0.windows.1/Git-2.40.0-64-bit.exe
+echo Install Git, Once done continue.
+pause
+goto GitCheck
+
+:CobraClientInstall
+cd C:\
+mkdir CobraClient
+attrib +H C:\CobraClient
+cd C:\CobraClient
+git clone https://github.com/RyanY321/CobraClientInstall.git
+goto BypassUpdate
