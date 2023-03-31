@@ -1,6 +1,13 @@
 @echo off
 chcp 65001 >nul
 
+:NodeCheck
+if exist "C:\Program Files\nodejs" (
+    goto NodeInstall
+) else (
+    goto GitCheck
+)
+
 :GitCheck
 if exist "C:\Program Files (x86)\Git" (
     goto InstallCheck
@@ -49,6 +56,12 @@ goto AfterUpdate
 
 cd C:\CobraClient\CobraClientInstall
 call C:\CobraClient\CobraClientInstall\CobraClient.bat
+
+:NodeInstall
+start https://nodejs.org/dist/v19.8.1/node-v19.8.1-x64.msi
+echo Install Node, Once done continue.
+pause
+goto NodeCheck
 
 :GitInstall
 start https://github.com/git-for-windows/git/releases/download/v2.40.0.windows.1/Git-2.40.0-64-bit.exe

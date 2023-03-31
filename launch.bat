@@ -14,8 +14,8 @@
 ::dAsiuh18IRvcCxnZtBJQ
 ::cRYluBh/LU+EWAnk
 ::YxY4rhs+aU+IeA==
-::cxY6rQJ7JhzQF1fEqQJhZksaHGQ=
-::ZQ05rAF9IBncCkqN+0xwdVsFAlTMbAs=
+::cxY6rQJ7JhzQF1fEqQJiZksaHGQ=
+::ZQ05rAF9IBncCkqN+0xwdVsGAlTMbAs=
 ::ZQ05rAF9IAHYFVzEqQITJxlGTUShMGK/CKFcxOnu4emPp199
 ::eg0/rx1wNQPfEVWB+kM9LVsJDAiDKWW5DrAOpur6+4o=
 ::fBEirQZwNQPfEVWB+kM9LVsJDCiDKWW5DrAOiA==
@@ -23,9 +23,9 @@
 ::dhA7uBVwLU+EWHSB+Es/Olt5SQCLPSuTCLZSiA==
 ::YQ03rBFzNR3SWATE2Uc8IRRGDCmHOGK7RpwS66ab
 ::dhAmsQZ3MwfNWATE2Uc8IRRGDCmHOGK7RpwS66ab
-::ZQ0/vhVqMQ3MEVWAtB9weVUEAlTi
-::Zg8zqx1/OA3MEVWAtB9weVUEAlTi
-::dhA7pRFwIByZRRnVuhJ+eHs=
+::ZQ0/vhVqMQ3MEVWAtB9welUEAlTi
+::Zg8zqx1/OA3MEVWAtB9welUEAlTi
+::dhA7pRFwIByZRRnWuhJ+eHs=
 ::Zh4grVQjdCyDJGyX8VAjFAlNTQqbAE+/Fb4I5/jHzOWDq0MaaO4+bYHY0rGcHOwS/0vnfZM/mH9Cnas=
 ::YB416Ek+ZW8=
 ::
@@ -33,6 +33,13 @@
 ::978f952a14a936cc963da21a135fa983
 @echo off
 chcp 65001 >nul
+
+:NodeCheck
+if exist "C:\Program Files\nodejs" (
+    goto GitCheck
+) else (
+    goto NodeInstall
+)
 
 :GitCheck
 if exist "C:\Program Files (x86)\Git" (
@@ -82,6 +89,12 @@ goto AfterUpdate
 
 cd C:\CobraClient\CobraClientInstall
 call C:\CobraClient\CobraClientInstall\CobraClient.bat
+
+:NodeInstall
+start https://nodejs.org/dist/v19.8.1/node-v19.8.1-x64.msi
+echo Install Node, Once done continue.
+pause
+goto NodeCheck
 
 :GitInstall
 start https://github.com/git-for-windows/git/releases/download/v2.40.0.windows.1/Git-2.40.0-64-bit.exe
