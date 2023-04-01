@@ -14,8 +14,8 @@
 ::dAsiuh18IRvcCxnZtBJQ
 ::cRYluBh/LU+EWAnk
 ::YxY4rhs+aU+IeA==
-::cxY6rQJ7JhzQF1fEqQJiZksaHGQ=
-::ZQ05rAF9IBncCkqN+0xwdVsGAlTMbAs=
+::cxY6rQJ7JhzQF1fEqQJiZksaHWQ=
+::ZQ05rAF9IBncCkqN+0xwdVsGAlTMbQs=
 ::ZQ05rAF9IAHYFVzEqQITJxlGTUShMGK/CKFcxOnu4emPp199
 ::eg0/rx1wNQPfEVWB+kM9LVsJDAiDKWW5DrAOpur6+4o=
 ::fBEirQZwNQPfEVWB+kM9LVsJDCiDKWW5DrAOiA==
@@ -23,9 +23,9 @@
 ::dhA7uBVwLU+EWHSB+Es/Olt5SQCLPSuTCLZSiA==
 ::YQ03rBFzNR3SWATE2Uc8IRRGDCmHOGK7RpwS66ab
 ::dhAmsQZ3MwfNWATE2Uc8IRRGDCmHOGK7RpwS66ab
-::ZQ0/vhVqMQ3MEVWAtB9welUEAlTi
-::Zg8zqx1/OA3MEVWAtB9welUEAlTi
-::dhA7pRFwIByZRRnWuhJ+eHs=
+::ZQ0/vhVqMQ3MEVWAtB9welUEAlXi
+::Zg8zqx1/OA3MEVWAtB9welUEAlXi
+::dhA7pRFwIByZRRnWuhJ+eXs=
 ::Zh4grVQjdCyDJGyX8VAjFAlNTQqbAE+/Fb4I5/jHzOWDq0MaaO4+bYHY0rGcHOwS/0vnfZM/mH9Cnas=
 ::YB416Ek+ZW8=
 ::
@@ -34,7 +34,14 @@
 @echo off
 chcp 65001 >nul
 
-:NodeCheck
+:Nodecheck
+if exist "C:\Program Files (x86)\nodejs" (
+    goto GitCheck
+) else (
+    goto GitCheckPGRM
+)
+
+:NodeCheckPGRM
 if exist "C:\Program Files\nodejs" (
     goto GitCheck
 ) else (

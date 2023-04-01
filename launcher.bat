@@ -1,11 +1,18 @@
 @echo off
 chcp 65001 >nul
 
-:NodeCheck
-if exist "C:\Program Files\nodejs" (
-    goto NodeInstall
-) else (
+:Nodecheck
+if exist "C:\Program Files (x86)\nodejs" (
     goto GitCheck
+) else (
+    goto GitCheckPGRM
+)
+
+:NodeCheckPGRM
+if exist "C:\Program Files\nodejs" (
+    goto GitCheck
+) else (
+    goto NodeInstall
 )
 
 :GitCheck
