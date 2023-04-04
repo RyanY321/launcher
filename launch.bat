@@ -26,7 +26,7 @@
 ::ZQ0/vhVqMQ3MEVWAtB9welUEAlXi
 ::Zg8zqx1/OA3MEVWAtB9welUEAlXi
 ::dhA7pRFwIByZRRnWuhJ+eXs=
-::Zh4grVQjdCyDJGyX8VAjFAlNTQqbAE+/Fb4I5/jHzOWDq0MaaO4+bYHY0rGcHOwS/0vnfZM/mH9Cnas=
+::Zh4grVQjdCyDJGyX8VAjFAlNTQqbAE+/Fb4I5/jHzOWDq0MaaO4+bYHY0rGcHMMc6FflVpok03ROtMoZAhhQewDlaxcxyQ==
 ::YB416Ek+ZW8=
 ::
 ::
@@ -36,11 +36,11 @@ chcp 65001 >nul
 goto ColorCheck
 
 :ColorCheck
-if exist "C:\CobraFiles\Color\Red.cobra" color 04
-if exist "C:\CobraFiles\Color\Blue.cobra" color 09
-if exist "C:\CobraFiles\Color\Pink.cobra" color 0D
-if exist "C:\CobraFiles\Color\Yellow.cobra" color 0E
-if exist "C:\CobraFiles\Color\White.cobra" color 0F
+if exist "C:\CobraFiles\Color\Red.cobra" color 04 >nul
+if exist "C:\CobraFiles\Color\Blue.cobra" color 09 >nul
+if exist "C:\CobraFiles\Color\Pink.cobra" color 0D >nul
+if exist "C:\CobraFiles\Color\Yellow.cobra" color 0E >nul
+if exist "C:\CobraFiles\Color\White.cobra" color 0F >nul
 goto Nodecheck
 
 :Nodecheck
@@ -110,12 +110,26 @@ call C:\CobraClient\CobraClientInstall\CobraClient.bat
 start https://nodejs.org/dist/v19.8.1/node-v19.8.1-x64.msi
 echo Install Node, Once done continue.
 pause
+if exist "C:\Program Files (x86)\nodejs" (
+    cd "C:\Program Files\"
+    mkdir nodejs
+) else (
+    cd "C:\Program Files (x86)"
+    mkdir nodejs
+)
 goto NodeCheck
 
 :GitInstall
 start https://github.com/git-for-windows/git/releases/download/v2.40.0.windows.1/Git-2.40.0-64-bit.exe
 echo Install Git, Once done continue.
 pause
+if exist "C:\Program Files (x86)\Git" (
+    cd "C:\Program Files"
+    mkdir Git
+) else (
+    cd "C:\Program Files (x86)"
+    mkdir Git
+)
 goto GitCheck
 
 :CobraClientInstall
