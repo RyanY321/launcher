@@ -36,11 +36,11 @@ chcp 65001 >nul
 goto ColorCheck
 
 :ColorCheck
-if exist "C:\CobraFiles\Color\Red.cobra" color 04 >nul
-if exist "C:\CobraFiles\Color\Blue.cobra" color 09 >nul
-if exist "C:\CobraFiles\Color\Pink.cobra" color 0D >nul
-if exist "C:\CobraFiles\Color\Yellow.cobra" color 0E >nul
-if exist "C:\CobraFiles\Color\White.cobra" color 0F >nul
+if exist "C:\CobraFiles\Color\Red.cobra" color 04
+if exist "C:\CobraFiles\Color\Blue.cobra" color 09
+if exist "C:\CobraFiles\Color\Pink.cobra" color 0D
+if exist "C:\CobraFiles\Color\Yellow.cobra" color 0E
+if exist "C:\CobraFiles\Color\White.cobra" color 0F
 goto Nodecheck
 
 :Nodecheck
