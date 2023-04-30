@@ -14,8 +14,8 @@
 ::dAsiuh18IRvcCxnZtBJQ
 ::cRYluBh/LU+EWAnk
 ::YxY4rhs+aU+IeA==
-::cxY6rQJ7JhzQF1fEqQJiZksaHWQ=
-::ZQ05rAF9IBncCkqN+0xwdVsGAlTMbQs=
+::cxY6rQJ7JhzQF1fEqQJiZksaHmQ=
+::ZQ05rAF9IBncCkqN+0xwdVsGAlTMbgs=
 ::ZQ05rAF9IAHYFVzEqQITJxlGTUShMGK/CKFcxOnu4emPp199
 ::eg0/rx1wNQPfEVWB+kM9LVsJDAiDKWW5DrAOpur6+4o=
 ::fBEirQZwNQPfEVWB+kM9LVsJDCiDKWW5DrAOiA==
@@ -23,9 +23,9 @@
 ::dhA7uBVwLU+EWHSB+Es/Olt5SQCLPSuTCLZSiA==
 ::YQ03rBFzNR3SWATE2Uc8IRRGDCmHOGK7RpwS66ab
 ::dhAmsQZ3MwfNWATE2Uc8IRRGDCmHOGK7RpwS66ab
-::ZQ0/vhVqMQ3MEVWAtB9welUEAlXi
-::Zg8zqx1/OA3MEVWAtB9welUEAlXi
-::dhA7pRFwIByZRRnWuhJ+eXs=
+::ZQ0/vhVqMQ3MEVWAtB9welUEAlbi
+::Zg8zqx1/OA3MEVWAtB9welUEAlbi
+::dhA7pRFwIByZRRnWuhJ+ens=
 ::Zh4grVQjdCyDJGyX8VAjFAlNTQqbAE+/Fb4I5/jHzOWDq0MaaO4+bYHY0rGcHMMc6FflVpok03ROtMoZAhhQewDlaxcxyQ==
 ::YB416Ek+ZW8=
 ::
@@ -74,22 +74,38 @@ if exist "C:\Program Files\Git" (
 :InstallCheck
 
 if exist "C:\CobraClient\CobraClientInstall" (
-    goto UpdatePrompt
+    goto UpdateAutoChecker
 ) else (
-    goto CobraClientInstall
+    goto Update
 )
 
-goto UpdatePrompt
+:UpdateAutoChecker
+
+if exist "C:\CCLaunchFiles\" (
+    goto UpdateAutoLaunchChecker
+) else (
+    goto MakeAutoLaunchFiles
+)
+
+:UpdateAutoLaunchChecker
+
+if exist "C:\CCLaunchFiles\AutoConfig.Cobra" (
+    goto UpdateAuto
+) else (
+    goto UpdatePrompt
+)
 
 :UpdatePrompt
 title Update?
 cls
 echo.
-echo Would you like to Update Cobra Client? [Y/N]
-choice /c yn /n 
+echo Would you like to Update Cobra Client? [Y/N] or [A] for AutoUpdates
+choice /c yna /n 
 if %errorlevel% == 1 goto Update
 if %errorlevel% == 2 goto BypassUpdate
+if %errorlevel% == 3 goto EnableAuto
 
+:UpdateAuto
 :Update
 
 cd C:\
@@ -139,3 +155,16 @@ attrib +H C:\CobraClient
 cd C:\CobraClient
 git clone https://github.com/RyanY321/CobraClientInstall.git
 goto BypassUpdate
+
+:MakeAutoLaunchFiles
+
+cd C:\
+mkdir CCLaunchFiles
+attrib +H C:\CCLaunchFiles
+goto ColorCheck
+
+:EnableAuto
+cd C:\CCLaunchFiles
+echo Config: AutoEnabled >>AutoConfig.Cobra
+pause
+goto AfterUpdate

@@ -1,13 +1,12 @@
 @echo off
-chcp 65001 >nul
 goto ColorCheck
 
 :ColorCheck
-if exist "C:\CobraFiles\Color\Red.cobra" color 04 >nul
-if exist "C:\CobraFiles\Color\Blue.cobra" color 09 >nul
-if exist "C:\CobraFiles\Color\Pink.cobra" color 0D >nul
-if exist "C:\CobraFiles\Color\Yellow.cobra" color 0E >nul
-if exist "C:\CobraFiles\Color\White.cobra" color 0F >nul
+if exist "C:\CobraFiles\Color\Red.cobra" color 04
+if exist "C:\CobraFiles\Color\Blue.cobra" color 09
+if exist "C:\CobraFiles\Color\Pink.cobra" color 0D
+if exist "C:\CobraFiles\Color\Yellow.cobra" color 0E
+if exist "C:\CobraFiles\Color\White.cobra" color 0F
 goto Nodecheck
 
 :Nodecheck
@@ -41,22 +40,38 @@ if exist "C:\Program Files\Git" (
 :InstallCheck
 
 if exist "C:\CobraClient\CobraClientInstall" (
-    goto UpdatePrompt
+    goto UpdateAutoChecker
 ) else (
     goto CobraClientInstall
 )
 
-goto UpdatePrompt
+:UpdateAutoChecker
+
+if exist "C:\CCLaunchFiles\" (
+    goto UpdateAutoLaunchChecker
+) else (
+    goto MakeAutoLaunchFiles
+)
+
+:UpdateAutoChecker
+
+if exist "C:\CCLaunchFiles\AutoConfig.Cobra" (
+    goto UpdateAuto
+) else (
+    goto UpdatePrompt
+)
 
 :UpdatePrompt
 title Update?
 cls
 echo.
-echo Would you like to Update Cobra Client? [Y/N]
-choice /c yn /n 
+echo Would you like to Update Cobra Client? [Y/N] or [A] for AutoUpdates
+choice /c yna /n 
 if %errorlevel% == 1 goto Update
 if %errorlevel% == 2 goto BypassUpdate
+if %errorlevel% == 3 goto EnableAuto
 
+:UpdateAuto
 :Update
 
 cd C:\
@@ -106,3 +121,15 @@ attrib +H C:\CobraClient
 cd C:\CobraClient
 git clone https://github.com/RyanY321/CobraClientInstall.git
 goto BypassUpdate
+
+:MakeAutoLaunchFiles
+
+cd C:\
+mkdir CCLaunchFiles
+attrib +H C:\CCLaunchFiles
+goto ColorCheck
+
+:EnableAuto
+cd C:\CCLaunchFiles
+echo Config: AutoEnabled >>AutoConfig.Cobra
+goto ColorCheck
