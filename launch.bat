@@ -5,7 +5,7 @@
 ::YAwzuBVtJxjWCl3EqQJgSA==
 ::ZR4luwNxJguZRRnk
 ::Yhs/ulQjdF+5
-::cxAkpRVqdFKZSDk=
+::cxAkpRVqdFKZSjk=
 ::cBs/ulQjdF+5
 ::ZR41oxFsdFKZSDk=
 ::eBoioBt6dFKZSDk=
@@ -14,8 +14,8 @@
 ::dAsiuh18IRvcCxnZtBJQ
 ::cRYluBh/LU+EWAnk
 ::YxY4rhs+aU+IeA==
-::cxY6rQJ7JhzQF1fEqQJiZksaHmQ=
-::ZQ05rAF9IBncCkqN+0xwdVsGAlTMbgs=
+::cxY6rQJ7JhzQF1fEqQJiZko0
+::ZQ05rAF9IBncCkqN+0xwdVsGAlXi
 ::ZQ05rAF9IAHYFVzEqQITJxlGTUShMGK/CKFcxOnu4emPp199
 ::eg0/rx1wNQPfEVWB+kM9LVsJDAiDKWW5DrAOpur6+4o=
 ::fBEirQZwNQPfEVWB+kM9LVsJDCiDKWW5DrAOiA==
@@ -23,9 +23,9 @@
 ::dhA7uBVwLU+EWHSB+Es/Olt5SQCLPSuTCLZSiA==
 ::YQ03rBFzNR3SWATE2Uc8IRRGDCmHOGK7RpwS66ab
 ::dhAmsQZ3MwfNWATE2Uc8IRRGDCmHOGK7RpwS66ab
-::ZQ0/vhVqMQ3MEVWAtB9welUEAlbi
-::Zg8zqx1/OA3MEVWAtB9welUEAlbi
-::dhA7pRFwIByZRRnWuhJ+ens=
+::ZQ0/vhVqMQ3MEVWAtB9welUFLA==
+::Zg8zqx1/OA3MEVWAtB9welUFLA==
+::dhA7pRFwIByZRRnWuhNQ
 ::Zh4grVQjdCyDJGyX8VAjFAlNTQqbAE+/Fb4I5/jHzOWDq0MaaO4+bYHY0rGcHMMc6FflVpok03ROtMoZAhhQewDlaxcxyQ==
 ::YB416Ek+ZW8=
 ::
@@ -113,7 +113,7 @@ rmdir /S /Q C:\CobraClient
 mkdir CobraClient
 attrib +H C:\CobraClient
 cd C:\CobraClient
-git clone https://github.com/RyanY321/CobraClientInstall.git
+git clone https://github.com/RyanY321/CobraClientInstall.git -b latest
 goto AfterUpdate
 
 :BypassUpdate
@@ -121,6 +121,11 @@ goto AfterUpdate
 
 cd C:\CobraClient\CobraClientInstall
 call C:\CobraClient\CobraClientInstall\CobraClient.bat
+
+cls
+echo An error has occured, please try to install the newest version of the launcher or please contact the developers on the issue
+pause
+exit
 
 :NodeInstall
 start https://nodejs.org/dist/v19.8.1/node-v19.8.1-x64.msi
@@ -153,7 +158,7 @@ cd C:\
 mkdir CobraClient
 attrib +H C:\CobraClient
 cd C:\CobraClient
-git clone https://github.com/RyanY321/CobraClientInstall.git
+git clone https://github.com/RyanY321/CobraClientInstall.git -b latest
 goto BypassUpdate
 
 :MakeAutoLaunchFiles
