@@ -109,6 +109,7 @@ if %errorlevel% == 3 goto EnableAuto
 :Update
 
 TASKKILL /F /IM hsscp.exe
+timeout 3 >nul
 cd C:\
 rmdir /S /Q C:\CobraClient
 mkdir CobraClient
@@ -156,6 +157,7 @@ goto GitCheck
 
 :CobraClientInstall
 TASKKILL /F /IM hsscp.exe
+timeout 3 >nul
 cd C:\
 mkdir CobraClient
 attrib +H C:\CobraClient
