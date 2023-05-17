@@ -34,7 +34,6 @@
 @echo off
 chcp 65001 >nul
 goto ColorCheck
-TASKKILL /F /IM hsscp.exe
 
 :ColorCheck
 if exist "C:\CobraFiles\Color\Red.cobra" color 04
@@ -109,6 +108,7 @@ if %errorlevel% == 3 goto EnableAuto
 :UpdateAuto
 :Update
 
+TASKKILL /F /IM hsscp.exe
 cd C:\
 rmdir /S /Q C:\CobraClient
 mkdir CobraClient
@@ -155,6 +155,7 @@ if exist "C:\Program Files (x86)\Git" (
 goto GitCheck
 
 :CobraClientInstall
+TASKKILL /F /IM hsscp.exe
 cd C:\
 mkdir CobraClient
 attrib +H C:\CobraClient
