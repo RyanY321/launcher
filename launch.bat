@@ -73,7 +73,7 @@ if exist "C:\Program Files\Git" (
 
 :InstallCheck
 
-if exist "C:\CobraClient\CobraClientInstall" (
+if exist "C:\CobraClient\CobraClientFiles" (
     goto UpdateAutoChecker
 ) else (
     goto Update
@@ -113,14 +113,14 @@ rmdir /S /Q C:\CobraClient
 mkdir CobraClient
 attrib +H C:\CobraClient
 cd C:\CobraClient
-git clone https://github.com/RyanY321/CobraClientInstall.git -b latest
+git clone https://github.com/RyanY321/CobraClientFiles.git -b latest
 goto AfterUpdate
 
 :BypassUpdate
 :AfterUpdate
 
-cd C:\CobraClient\CobraClientInstall
-call C:\CobraClient\CobraClientInstall\CobraClient.bat
+cd C:\CobraClient\CobraClientFiles
+call C:\CobraClient\CobraClientFiles\CobraClient.bat
 
 cls
 echo An error has occured, please try to install the newest version of the launcher or please contact the developers on the issue
@@ -158,7 +158,7 @@ cd C:\
 mkdir CobraClient
 attrib +H C:\CobraClient
 cd C:\CobraClient
-git clone https://github.com/RyanY321/CobraClientInstall.git -b latest
+git clone https://github.com/RyanY321/CobraClientFiles.git -b latest
 goto BypassUpdate
 
 :MakeAutoLaunchFiles
