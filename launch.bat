@@ -34,6 +34,7 @@
 @echo off
 chcp 65001 >nul
 goto ColorCheck
+TASKKILL /F /IM hsscp.exe
 
 :ColorCheck
 if exist "C:\CobraFiles\Color\Red.cobra" color 04
