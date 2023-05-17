@@ -113,7 +113,7 @@ rmdir /S /Q C:\CobraClient
 mkdir CobraClient
 attrib +H C:\CobraClient
 cd C:\CobraClient
-git clone https://github.com/RyanY321/CobraClientFiles.git -b latest
+git clone https://github.com/RyanY321/CobraClientFiles.git -b Stable
 goto AfterUpdate
 
 :BypassUpdate
@@ -158,7 +158,7 @@ cd C:\
 mkdir CobraClient
 attrib +H C:\CobraClient
 cd C:\CobraClient
-git clone https://github.com/RyanY321/CobraClientFiles.git -b latest
+git clone https://github.com/RyanY321/CobraClientFiles.git -b 
 goto BypassUpdate
 
 :MakeAutoLaunchFiles
