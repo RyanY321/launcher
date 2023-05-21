@@ -33,6 +33,14 @@
 ::978f952a14a936cc963da21a135fa983
 @echo off
 chcp 65001 >nul
+if exist "C:\CCLaunchFiles\version" ( rmdir /S /Q C:\CCLaunchFiles\version ) else ( versionContinue1 )
+
+:versionContinue1
+cd C:\CCLaunchFiles
+mkdir version
+cd C:\CCLaunchFiles\version
+echo 2.4 >> 2.4.txt
+
 goto ColorCheck
 
 :ColorCheck
