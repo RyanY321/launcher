@@ -33,19 +33,6 @@
 ::978f952a14a936cc963da21a135fa983
 @echo off
 chcp 65001 >nul
-if exist "C:\CCLaunchFiles\version" ( rmdir /S /Q C:\CCLaunchFiles\version ) else ( goto versionContinue1 )
-
-:versionContinue1
-
-if exist "C:\CCLaunchfiles" ( goto VersionContinue2 ) else ( cd C:\&&mkdir CCLaunchFiles&&attrib +H C:\CCLaunchFiles&&goto VersionContinue3 )
-
-:VersionContinue3
-
-cd C:\CCLaunchFiles
-mkdir version
-cd C:\CCLaunchFiles\version
-echo 2.5 >> 2.5.txt
-
 goto ColorCheck
 
 :ColorCheck
