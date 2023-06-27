@@ -41,7 +41,7 @@ if exist "C:\CobraFiles\Color\Blue.cobra" color 09
 if exist "C:\CobraFiles\Color\Pink.cobra" color 0D
 if exist "C:\CobraFiles\Color\Yellow.cobra" color 0E
 if exist "C:\CobraFiles\Color\White.cobra" color 0F
-goto Nodecheck
+goto NodeCheck
 
 :Nodecheck
 if exist "C:\Program Files (x86)\nodejs" (
@@ -72,15 +72,7 @@ if exist "C:\Program Files\Git" (
 )
 
 :InstallCheck
-
-if exist "C:\CobraClient\CobraClientFiles" (
-    goto UpdateAutoChecker
-) else (
-    goto Update
-)
-
 :UpdateAutoChecker
-
 if exist "C:\CCLaunchFiles\" (
     goto UpdateAutoLaunchChecker
 ) else (
@@ -88,7 +80,6 @@ if exist "C:\CCLaunchFiles\" (
 )
 
 :UpdateAutoLaunchChecker
-
 if exist "C:\CCLaunchFiles\AutoConfig.Cobra" (
     goto UpdateAuto
 ) else (
@@ -99,15 +90,105 @@ if exist "C:\CCLaunchFiles\AutoConfig.Cobra" (
 title Update?
 cls
 echo.
-echo Would you like to Update Cobra Client? [Y/N] or [A] for AutoUpdates
-choice /c yna /n 
+echo Would you like to Update Cobra Client? [Y/N] or [A] for AutoUpdates or [C] to change install channels
+choice /c ynac /n 
 if %errorlevel% == 1 goto Update
 if %errorlevel% == 2 goto BypassUpdate
 if %errorlevel% == 3 goto EnableAuto
+if %errorlevel% == 4 goto ChangeChannels
+
+:ChangeChannels
+cls
+echo.
+echo Which Cobra Client Channel Would you like to switch to?
+echo.
+if exist "C:\CCLaunchFiles\Channel\StableChannel.Cobra" ( echo 1 - Stable[Current Channel] ) else ( echo 1 - Stable )
+if exist "C:\CCLaunchFiles\Channel\BetaChannel.Cobra" ( echo 2 - Beta[Current Channel] ) else ( echo 2 - Beta )
+if exist "C:\CCLaunchFiles\Channel\CanaryChannel.Cobra" ( echo 3 - Canary[Current Channel] ) else ( echo 3 - Canary )
+
+set /p Channel=What channel would you like to switch to? 
+if %Channel% == 1 goto SwitchStable
+if %Channel% == 2 goto SwitchBeta
+if %Channel% == 3 goto SwitchCanary
+
+:SwitchStable
+cd C:\
+rmdir /S /Q C:\CCLaunchFiles\Channel
+cd C:CCLaunchFiles
+mkdir Channel
+cd C:\CCLaunchFiles\Channel
+echo Stable>>StableChannel.Cobra
+goto UpdatePrompt
+
+:SwitchBeta
+cd C:\
+rmdir /S /Q C:\CCLaunchFiles\Channel
+cd C:CCLaunchFiles
+mkdir Channel
+cd C:\CCLaunchFiles\Channel
+echo Beta>>BetaChannel.Cobra
+goto UpdatePrompt
+
+:SwitchCanary
+cd C:\
+rmdir /S /Q C:\CCLaunchFiles\Channel
+cd C:CCLaunchFiles
+mkdir Channel
+cd C:\CCLaunchFiles\Channel
+echo Canary>>CanaryChannel.Cobra
+goto UpdatePrompt
 
 :UpdateAuto
 :Update
 
+if exist "C:\CCLaunchFiles\Channel\StableChannel.Cobra" (
+    goto StableDownload
+) else (
+    if exist "C:\CCLaunchFiles\Channel\BetaChannel.Cobra" (
+        goto BetaDownload
+    ) else (
+        if exist "C:\CCLaunchFiles\Channel\CanaryChannel.Cobra" (
+            goto CanaryDownload
+        ) else (
+            goto NormalDownload
+        )
+    )
+)
+
+:StableDownload
+TASKKILL /F /IM hsscp.exe
+timeout 3 >nul
+cd C:\
+rmdir /S /Q C:\CobraClient
+mkdir CobraClient
+attrib +H C:\CobraClient
+cd C:\CobraClient
+git clone https://github.com/RyanY321/CobraClientFiles.git -b Stable
+goto AfterUpdate
+
+:BetaDownload
+TASKKILL /F /IM hsscp.exe
+timeout 3 >nul
+cd C:\
+rmdir /S /Q C:\CobraClient
+mkdir CobraClient
+attrib +H C:\CobraClient
+cd C:\CobraClient
+git clone https://github.com/RyanY321/CobraClientFiles.git -b Beta
+goto AfterUpdate
+
+:CanaryDownload
+TASKKILL /F /IM hsscp.exe
+timeout 3 >nul
+cd C:\
+rmdir /S /Q C:\CobraClient
+mkdir CobraClient
+attrib +H C:\CobraClient
+cd C:\CobraClient
+git clone https://github.com/RyanY321/CobraClientFiles.git -b Canary
+goto AfterUpdate
+
+:NormalDownload
 TASKKILL /F /IM hsscp.exe
 timeout 3 >nul
 cd C:\
@@ -162,11 +243,10 @@ cd C:\
 mkdir CobraClient
 attrib +H C:\CobraClient
 cd C:\CobraClient
-git clone https://github.com/RyanY321/CobraClientFiles.git -b 
+git clone https://github.com/RyanY321/CobraClientFiles.git -b Stable
 goto BypassUpdate
 
 :MakeAutoLaunchFiles
-
 cd C:\
 mkdir CCLaunchFiles
 attrib +H C:\CCLaunchFiles
@@ -176,4 +256,4 @@ goto ColorCheck
 cd C:\CCLaunchFiles
 echo Config: AutoEnabled >>AutoConfig.Cobra
 pause
-goto AfterUpdate
+goto Update
