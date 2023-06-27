@@ -108,8 +108,14 @@ if exist "C:\CCLaunchFiles\Channel\CanaryChannel.Cobra" ( echo 3 - Canary[Curren
 
 set /p Channel=What channel would you like to switch to? 
 if %Channel% == 1 goto SwitchStable
+if %Channel% == Stable goto SwitchStable
+if %Channel% == stable goto SwitchStable
 if %Channel% == 2 goto SwitchBeta
+if %Channel% == Beta goto SwitchBeta
+if %Channel% == beta goto SwitchBeta
 if %Channel% == 3 goto SwitchCanary
+if %Channel% == Canary goto SwitchCanary
+if %Channel% == canary goto SwitchCanary
 
 :SwitchStable
 cd C:\
